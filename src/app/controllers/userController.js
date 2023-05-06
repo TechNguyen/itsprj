@@ -92,18 +92,24 @@ class userController{
             .catch(next)   
     }
     filterMember(req,res,next) {
-        const [courseMber,specializedMember] = [
+        const [specializedMember,courseMber] = [
             req.body.course ,req.body.specialized
         ]   
         Accounts.findById(req.params.id)
             .then((acc) => {
                 Accounts.find({course: courseMber, specialized: specializedMember})
                     .then((user) => {
-                        res.json(user)
-                        // res.render('admin/listMember', {acc: mongooseToObject(acc), user: multiltoObject(user)})
+                        res.render('admin/listMember', {acc: mongooseToObject(acc), user: multiltoObject(user), course: courseMber, specialized: specializedMember})
                     })
                 })
             .catch(next)   
+    }
+    teachSupport(req,res,next) {
+        Accounts.findById(req.params.id)
+            .then((acc) => {
+                res.render('admin/techSupport', {acc: mongooseToObject(acc)})
+            })
+            .catch(next)
     }
 }
 module.exports = new userController()

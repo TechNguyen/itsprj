@@ -14,6 +14,7 @@ router.get('/listMember/:id', user.renderList)
 router.post('/user/:id', user.createUser)
 router.post('/search/:id', user.searchMember)
 router.post('/filter/:id', user.filterMember)
+router.get('/techSupport/:id', user.teachSupport)
 router.get('/logout/:id',  function(req,res,next) {
     req.app.locals.layout = 'main'
     next();

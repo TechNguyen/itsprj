@@ -154,7 +154,7 @@
             </div>
             <div class="active__item">
                 <div class="active__img">
-                    <img src="./img/" alt="">
+                    <img src="./img/baotri.jpg" alt="">
                 </div>
                <div class="item--content">
                     <h2>Bảo trì, kiểm tra</h2>
@@ -175,7 +175,7 @@
                 <div class="active__img">
                     <img src="./img/itnews.png" alt="">
                 </div>
-                 <div class="item--content">
+                <div class="item--content">
                     <h2>IT-News</h2>
                     <div class="item--title">
                         <p>Post bài về công nghệ hằng tuần</p>
@@ -194,8 +194,77 @@
 
 
     <div id="prize">
-        <h1>Thành tích đạt được</h1>
+        <h1 style="text-align: center;">Thành tích đạt được</h1>
+        <div class="prize__list">
+
+            <div class="prize__item">
+                    <div class="prize__img">
+                        <img src="./img/thanhtich1.jpg" alt="">
+                    </div>
+                    <span class="prize__click">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </span>
+                <div class="prize--content">
+                        <h2>Gặp gỡ tân sinh viên HaUI</h2>
+                        <div class="prize--title">
+                            <span>
+                                Là một trong những câu lạc bộ quan trọng của khoa và trường. Luôn giữ vững kỷ cương,tinh thần, trách nghiệm là bến đỗ tin tưởng để cho các bạn sinh viên dành 4 năm thanh xuân
+                            </span>
+                        </div>
+                    </div>
+            </div>
+
+
+            <div class="prize__item">
+                    <div class="prize__img">
+                        <img src="./img/thanhtich2.jpg" alt="">
+                    </div>
+                    <span class="prize__click">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </span>
+                <div class="prize--content">
+                        <h2>Hoạt động Tech Support</h2>
+                        <div class="prize--title">
+                            <span>
+                                Trở thành điểm tựa tin cậy, là đội được thầy cô cũng như các bạn tin tưởng trong lĩnh vực kỹ thuật máy tính. Hỗ trợ được rất nhiều các bạn sinh viên về máy tính
+                            </span>
+                        </div>
+                    </div>
+            </div>
+
+
+
+            <div class="prize__item">
+                    <div class="prize__img">
+                        <img src="./img/thanhtich2.jpg" alt="">
+                    </div>
+                    <span class="prize__click">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </span>
+                <div class="prize--content">
+                        <h2>Thành tích trong các cuộc thi</h2>
+                        <div class="prize--title">
+                            <span>
+                                Hoạt động sôi nổi trong các chương trình , cuộc thi do trường tổ chức về mặt phần cứng.Bên cạnh đó các thành tích liên quan đến các cuộc thi như học thuật, games, văn nghệ.
+                            </span>
+                        </div>
+                    </div>
+            </div>
+        </div>
     </div>
+
+    <div id="target">
+
+
+    </div>
+
+
+
+    <div id="hiremember">
+        
+    </div>
+
+
 </div>
 
 
@@ -239,6 +308,19 @@ const swiper = new Swiper('.swiper', {
     type: 'bullets',
   },
 });
-
+const prizeClick = Array.from(document.querySelectorAll('.prize__click'))
+prizeClick.map((pr) => {
+    pr.addEventListener('click', () => handleShow(pr))
+})
+function handleShow(item) {
+    const contentItem = item.parentElement.querySelector('.prize--content')
+    if(item.querySelector('i').className == 'fa-solid fa-arrow-down') {
+        contentItem.style.animation = 'showprize 0.8s ease-in-out forwards'
+        item.querySelector('i').className = ' fa-solid fa-arrow-up'
+    } else {
+        contentItem.style.animation = 'hidenprize 0.8s ease-in-out forwards'
+        item.querySelector('i').className = 'fa-solid fa-arrow-down'
+    }
+}
 
 </script>
