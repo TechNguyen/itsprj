@@ -1,1 +1,15 @@
-<h1>Content</h1>
+
+<div class="content">
+    <div class="post">
+        <ul class="message-chat">
+            {{#each posts}}
+                <div>
+                        <div>
+                            <h1>{{this.userId}}</h1>
+                            <p>{{this.content}}</p>
+                        </div>
+                </div>
+            {{/each}}
+        </ul>
+    </div>
+</div>

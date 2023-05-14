@@ -71,7 +71,7 @@
             <td>{{this.teach}}</td>
             <td>{{this.createdAt}}</td>
             <td>
-              <a href="/user/edit/{{this._id}}" class="btn btn-link">Update</a>
+              <a href="/auth/admin/update/{{this._id}}" class="btn btn-link">Cập nhật</a>
             </td>
             <td>
               <a
@@ -85,8 +85,8 @@
           </tr>
         {{else}}
           <tr>
-            <td colspan="5" class="text-center">Khong co nguoi dung
-              <a href="/user/create">Đăng ky user</a>
+            <td colspan="5" class="text-center">Không có người dùng
+              <a href="/user/create">Đăng ký thành viên</a>
             </td>
           </tr>
         {{/each}}
@@ -105,7 +105,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Thong bao</h5>
+        <h5 class="modal-title">Thông báo</h5>
         <button
           type="button"
           class="close"
@@ -116,7 +116,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Ban co chac chan muon xoa.</p>
+        <p>Ban có chắc chắn muốn chuyển.</p>
       </div>
       <div class="modal-footer">
         <button

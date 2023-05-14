@@ -1,6 +1,6 @@
 const Accounts = require('../models/account')
+const Feed = require('../models/feed')
 const { mongooseToObject, multiltoObject } = require('../../ultis/mongoose')
-const { PromiseProvider } = require('mongoose')
 class userController{
     showInfor(req ,res,next) {
         Accounts.findById(req.params.id)
@@ -17,9 +17,12 @@ class userController{
             .catch(next)
     }
     update(req,res,next) {
-        Accounts.updateOne({})
+        Accounts.findById(req.params.id)
             .then((acc) => {
-                res.render('admin/showinfor', {acc: mongooseToObject(acc)})
+                Accounts.updateOne({_id: req.params.id}, req.body)
+                    .then(() => {
+                        res.render('admin/showinfor', {acc: mongooseToObject(acc)})
+                    })
             })
             .catch(next)
     }
@@ -28,19 +31,24 @@ class userController{
             .then((acc) => {
                 res.render('admin/post',{acc: mongooseToObject(acc)})
             })
+            .catch(next)
     }
     renderUser(req,res,next) {
         Accounts.findById(req.params.id)
             .then((acc) => { 
-                res.render('admin/createMember', {acc: mongooseToObject(acc)})
+                res.render('admin/createMember', {acc: mongooseToObject(acc)})  
             })
             .catch(next)
     }
     renderContent(req,res,next) {
         Accounts.findById(req.params.id)
             .then((acc) => {
-                res.render('admin/mainContent', {acc: mongooseToObject(acc)})
-            })
+                Feed.find()
+                    .then((posts) => {
+                        res.render('admin/mainContent', {acc: mongooseToObject(acc), posts: multiltoObject(posts)}) 
+                    })
+                }  
+            )
             .catch(next)
     }
     createUser(req,res,next) {
@@ -54,13 +62,14 @@ class userController{
             email: req.body.email,
             specialized: req.body.specialized,
             course: req.body.course,
-            position: req.body.position
+            position: req.body.position,
+            thumbImg: req.body.avatar
         }
         Accounts.findById(req.params.id)
             .then(() => {
                 Accounts.create(user)
                     .then((acc) => {
-                        res.send('ok')
+                        upload.upload
                     })
                 
             })
@@ -72,13 +81,14 @@ class userController{
             .then((acc) => {
                 Accounts.find()
                     .then((user) => {
-                        res.render('admin/listMember', {acc: mongooseToObject(acc), user: multiltoObject(user)})
+                        res.render('admin/listMember', {acc: mongooseToObject(acc), user : multiltoObject(user)})
                     })
             })
             .catch(next)
     }
-    logout(req,res,next) {
-        res.render('home')
+    async logout(req,res,next) {
+        await res.clearCookie('refreshtoken')
+        res.redirect('/')
     }
     searchMember(req,res,next) {
         const checkmember = req.body.usercheck
@@ -108,6 +118,13 @@ class userController{
         Accounts.findById(req.params.id)
             .then((acc) => {
                 res.render('admin/techSupport', {acc: mongooseToObject(acc)})
+            })
+            .catch(next)
+    }
+    contact(req,res,next) {
+        Accounts.findById(req.params.id)
+            .then((acc) => {
+                res.render('admin/contact', {acc: mongooseToObject(acc)})
             })
             .catch(next)
     }

@@ -7,7 +7,9 @@ router.all('/*', function (req, res, next) {
 });
 router.get('/infor/:id', user.showInfor)
 router.get('/update/:id', user.updateInfor)
+router.put('/infor/:id', user.update)
 router.get('/post/:id', user.post)
+router.get('/contact/:id', user.contact)
 router.get('/create/:id', user.renderUser)
 router.get('/dashboard/:id', user.renderContent)
 router.get('/listMember/:id', user.renderList)

@@ -1,5 +1,7 @@
 const { mongooseToObject, multiltoObject } = require('../../ultis/mongoose')
 const  jwt = require('jsonwebtoken');
+const  bryct = require('bcrypt')
+const cookie = require('cookie')
 const Account = require('../models/account')
 const express = require('express')
 class authen {
@@ -16,7 +18,29 @@ class authen {
     memberShow(req,res,next) {
         res.render('layouts/member', {layout: false})
     }
-    login(req,res,next) {
+    async verifytoken(req,res,next) {
+        if(req.cookie?.refreshtoken) {
+            const refreshToken = req.cookies.refreshtoken
+            jwt.verify(refreshToken, process.env.REFRESH_JWT_TOKEN, (err,decode) => {
+                if(err) {
+                    return res.status(406).json({message: 'Can xac thuc '})
+                } else {
+                    const accessToken = jwt.sign(
+                        {id: data.id,
+                        role: data.role
+                        },
+                        process.env.JWT__SECRET,
+                        {
+                          expiresIn: '100s',
+                        }
+                    )
+                }
+            })
+        }else {
+            res.status(406).json({message: 'Unauthorize'})
+        }
+    }
+    async login(req,res,next) {
         let user = req.body.username;
         let pass = req.body.password;
         if(user == '' && pass == '') {
@@ -27,10 +51,32 @@ class authen {
         }
         else if(pass == '') {
             res.render('login', {notifipass: 'Mật khẩu bắt buộc', username: user,layout: false} )
-        } else {
+        }
+         else{
             Account.findOne({username: user, password: pass})
                 .then((data) => {
                     if(data) {
+                        const accessToken = jwt.sign(
+                            {id: data.id,
+                            role: data.role
+                            },
+                            process.env.JWT__SECRET,
+                            {
+                              expiresIn: '100s',
+                            }
+                        )
+                        const refreshToken =  jwt.sign(
+                            {id: data.id,
+                            role: data.role},
+                            process.env.REFRESH_JWT_TOKEN,
+                            {expiresIn: '1d'}
+                        )
+                        res.cookie('refreshtoken', refreshToken, {
+                            httpOnly: true,
+                            sameSite: 'None',
+                            secure: true,
+                            maxAGE: 24 * 60 * 60 * 1000,
+                        })
                         if(mongooseToObject(data).role === 'admin') {
                             res.redirect(`/auth/admin/${data._id}`);
                         } else {

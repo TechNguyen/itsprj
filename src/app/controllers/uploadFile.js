@@ -1,20 +1,25 @@
-const { error } = require('console');
-const formidable = require('formidable');
-const fs = require('fs')
-const http = require('http')
+const multer = require('multer')
+const storage  = multer.diskStorage({
+    destination: function (req,file,cb) {
+        cb(null, './upload')
+    }, 
+    filename: function(req,file,cb) {
+        let filearr = file.originalname.split('.')
+        let filename = file[0];
+        let filext = file[1];
+        cb(null, filename + '-' + Date.now() + '.' + filext )
+    }
+})
+const upload = multer({
+    storage: storage
+}).single('sameple_image')
 class UploadFile {
     upload(req,res,next) {
-            res.render('file/upload')
-    }
-    postFile(req,res,next) {
-        const form = formidable({multiples: true})
-        form.parse(req,(err,fields,files) => {
-            if(err) {
-                next(err);
-                return;
-            }
-            res.json({fields, files})
-        })
+        if(error) {
+            res.end('file error')
+        } else {
+            res.end('file success')
+        }
     }
        
 }

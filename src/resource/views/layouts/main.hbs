@@ -31,6 +31,59 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script>
+    const introduce = document.getElementById('about__infor--wrap')
+    const imageBox = document.querySelector('.about__member')
+    let listbanner = Array.from(introduce.querySelectorAll('.infor__banner div'))
+    let  listtext = Array.from(introduce.querySelectorAll('.infor__banner div p'))
+    let  listultext = Array.from(introduce.querySelectorAll('.infor__list li'))
+    let  listlitext = Array.from(introduce.querySelectorAll('.infor__list li p'))
+    window.addEventListener('scroll', () => {
+         if(introduce.offsetTop < window.scrollY + window.innerHeight && introduce.offsetTop + introduce.offsetHeight  >  window.scrollY + window.innerHeight - 100) {
+            listbanner.map(item => {
+                item.classList.remove('fadeOut')
+                item.classList.add('fadeIn')
+            })
+            listtext.map(item => {
+                item.classList.remove('fadeOutText')
+                item.classList.add('fadeInText')
+            })
+            listlitext.map(item => {
+                item.classList.remove('fadeOutText')
+                item.classList.add('fadeInText')
+            })
+            listultext.map(item => {
+                item.classList.remove('fadeOut')
+                item.classList.add('fadeIn')
+            })
+         } else  {
+            listbanner.map(item => {
+                item.classList.remove('fadeIn')
+                item.classList.add('fadeOut')
+            })
+            listultext.map(item => {
+                item.classList.remove('fadeIn')
+                item.classList.add('fadeOut')
+            })
+            listtext.map(item => {
+                item.classList.remove('fadeInText')
+                item.classList.add('fadeOutText')
+            })  
+            listlitext.map(item => {
+                item.classList.remove('fadeInText')
+                item.classList.add('fadeOutText')
+            })  
+         }
 
+
+
+         if(imageBox.offsetTop < window.scrollY + window.innerHeight && imageBox.offsetTop + imageBox.offsetHeight  >  window.scrollY + window.innerHeight - 100) {
+            let imgItem = Array.from(imageBox.querySelectorAll('.image-box'))
+            imgItem.forEach(item => {
+                item.classList.add('showinfor')
+            })
+         }
+    })  
+</script>
 </body>
 </html>
