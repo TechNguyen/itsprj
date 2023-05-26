@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const feed = new Schema({
     userId: String,
+    username: String,
     content: String,
 }, {
     collection: 'Feed', 

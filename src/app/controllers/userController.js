@@ -1,6 +1,16 @@
 const Accounts = require('../models/account')
 const Feed = require('../models/feed')
+const uploadFile = require('./uploadFile')
 const { mongooseToObject, multiltoObject } = require('../../ultis/mongoose')
+const multer = require('multer')
+const store = multer.diskStorage({
+    destination: 'public/accounts/images',
+    filename: function (req, file, cb) {
+        const name = file.originalname.toLowerCase().split(' ').join('_');
+        cb(null, name + '-' + Date.now());
+    }
+});
+const upload = multer({ storage: store }).single('avartar');
 class userController{
     showInfor(req ,res,next) {
         Accounts.findById(req.params.id)
@@ -63,18 +73,25 @@ class userController{
             specialized: req.body.specialized,
             course: req.body.course,
             position: req.body.position,
-            thumbImg: req.body.avatar
+            permision: req.body.permision,
+            phonenumber: req.body.phonenumber,
+            msv: req.body.msv,
+            thumbImg: req.body.file  
         }
+
+
+        console.log(thumbImg);
         Accounts.findById(req.params.id)
             .then(() => {
                 Accounts.create(user)
                     .then((acc) => {
-                        upload.upload
+                        res.json(acc)
                     })
-                
             })
             .catch(next)
-        
+
+
+
     }
     renderList(req,res,next) {
         Accounts.findById(req.params.id)
@@ -107,11 +124,28 @@ class userController{
         ]   
         Accounts.findById(req.params.id)
             .then((acc) => {
-                Accounts.find({course: courseMber, specialized: specializedMember})
+                if(courseMber == '') {
+                    Accounts.find({course: courseMber})
+                        .then((user) => {
+                            res.render('admin/listMember',  {acc: mongooseToObject(acc), user: multiltoObject(user), course: courseMber, specialized: specializedMember})
+                        })
+                }else if(specializedMember == '') {
+                    Accounts.find({ specialized: specializedMember})
+                        .then(user => {
+                            res.render('admin/listMember',  {acc: mongooseToObject(acc), user: multiltoObject(user), course: courseMber, specialized: specializedMember})
+                        } 
+                        )
+                } else if(courseMber == '' && specializedMember == '') {
+                    Accounts.find()
+                        .then((user) => {
+                            res.render('admin/listMember',  {acc: mongooseToObject(acc), user: multiltoObject(user)})
+                        })
+                } else {
+                    Accounts.find({course: courseMber, specialized: specializedMember})
                     .then((user) => {
                         res.render('admin/listMember', {acc: mongooseToObject(acc), user: multiltoObject(user), course: courseMber, specialized: specializedMember})
-                    })
-                })
+                    })    
+                }})
             .catch(next)   
     }
     teachSupport(req,res,next) {
@@ -125,6 +159,13 @@ class userController{
         Accounts.findById(req.params.id)
             .then((acc) => {
                 res.render('admin/contact', {acc: mongooseToObject(acc)})
+            })
+            .catch(next)
+    }
+    mission (req,res,next) {
+        Accounts.findById(req.params.id)
+            .then((acc) => {
+                res.render('admin/mission', {acc: mongooseToObject(acc)})
             })
             .catch(next)
     }

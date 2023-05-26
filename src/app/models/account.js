@@ -8,11 +8,14 @@ const account = new Schema({
     lastname: String,
     email: String,
     class: String,
-    course: String,
     specialized: String,
     thumbImg: String,
     address: String,
-    potision: String,
+    position: String,
+    permision: String,
+    msv: String,
+    phonenumber: String,
+    course : String
 }, {
     collection: 'Accounts', 
     timestamps: true

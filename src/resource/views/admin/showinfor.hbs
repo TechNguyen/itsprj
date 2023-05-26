@@ -2,16 +2,29 @@
 <div class="admin__infor">
     <h3>Thông tin người dùng</h3>
     {{#with acc}}
-                <div class="col-lg-4 col-sm-6">
-                    <div class="card " style="width: 18rem">
-                        <div class="card-body">
-                            <p class="card-title">{{email}}</p>
-                            <p class="card-text">{{address}}</p>
-                            <p class="card-text">{{firstname}}</p>
-                            <p class="card-text">{{lastname}}</p>
-                        </div>
-                    </div>
+            <div class="col-lg-8 col-sm-6 admin__infor--card">
+                <div class="avatar__img">
+                    <img src="./img/honamtu.jpg" alt="avatar">
                 </div>
+                <div class="avatar__content">
+                    <p>{{firstname}}</p>
+                    <p>{{lastname}}</p>
+                </div>
+                <div class="avatar__detail">
+                    <span class="detail__item">
+                        <p>{{class}}</p>    
+                    </span>
+                    <span class="detail__item">
+                        <p>{{specialized}}</p>    
+                    </span>
+                    <span class="detail__item">
+                        <p>{{address}}</p>    
+                    </span>
+                    <span class="detail__item">
+                        <p>{{potision}}</p>    
+                    </span>
+                </div>
+            </div>
     {{/with}}
 </div>
 
