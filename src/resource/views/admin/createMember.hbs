@@ -1,5 +1,5 @@
 {{#with acc}}
-<form class="row g-3" action="/auth/admin/user/{{_id}}" method="post">
+<form class="row g-3" action="/auth/admin/user/{{_id}}" method="post" enctype="multipart/form-data">
   <div class="col-md-4">
     <label for="validationServer01" class="form-label">Họ</label>
     <input type="text" class="form-control " name="firstname" id="validationServer01" required>
@@ -78,8 +78,8 @@
 
   <div class="input-group col-md-12">
   <div class="mb-3">
-    <label for="avartar" class="form-label">Image</label>
-    <input class="form-control" type="file" id="avartar" name="avartar">
+    <label for="avatar" class="form-label">Image</label>
+    <input class="form-control" type="file" id="avatar" name="avatar" accept="image/png, image/jpeg">
   </div>
 </div>
   {{!-- <div class="col-md-3">

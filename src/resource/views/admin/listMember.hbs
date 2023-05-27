@@ -1,4 +1,4 @@
- {{#with acc, value}}
+ {{#with acc}}
         <nav class="navbar navbar-light bg-light">
           <form class="form-inline" method="post" action="/auth/admin/search/{{_id}}">
             <input class="form-control mr-sm-2" type="search" placeholder="Tìm theo tên" aria-label="Search" name="usercheck">
@@ -8,9 +8,9 @@
 
         <form method="post" action="/auth/admin/filter/{{_id}}">
           <div class="col-auto my-1">
-            <label class="mr-sm-2" for="inlineFormCustomSelect">Chuyên ngành</label>
-            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="course">
-              <option selected value={specialized}>Ngành</option>
+            <label class="mr-sm-2" for="specializedChoose ">Chuyên ngành</label>
+            <select class="form-select" id="specializedChoose" name="specialized" aria-valuenow="{{valuespecial}}" >
+              <option selected value="">Ngành</option>
               <option value="KHMT">KHMT</option>
               <option value="KTPM">KTPM</option>
               <option value="CNTT">CNTT</option>
@@ -18,14 +18,14 @@
             </select>
           </div>
           <div class="col-auto my-1">
-            <label class="mr-sm-2" for="inlineFormCustomSelect">Khóa học</label>
-            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="specialized">
-              <option selected value={course}>Khóa</option>
-              <option value="K14">K14</option>
-              <option value="K15">K15</option>
-              <option value="K16">K16</option>
-              <option value="K17">K17</option>
-              <option value="OTHER">Khác</option>
+            <label class="mr-sm-2" for="coureChoose">Khóa học</label>
+              <select class="form-select"  id="coureChoose" name="course" aria-valuenow="{{valuecourse}}">
+                <option selected value="">Khóa</option>
+                <option value="K14">K14</option>
+                <option value="K15">K15</option>
+                <option value="K16">K16</option>
+                <option value="K17">K17</option>
+                <option value="OTHER">Khác</option>
             </select>
           </div>
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Lọc thành viên</button>
@@ -177,3 +177,4 @@
       userchecked >= 1 ? excBtn.removeClass('disabled') : excBtn.addClass('disabled');
     }
 </script>
+

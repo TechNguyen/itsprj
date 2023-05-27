@@ -1,16 +1,6 @@
 const Accounts = require('../models/account')
 const Feed = require('../models/feed')
-const uploadFile = require('./uploadFile')
 const { mongooseToObject, multiltoObject } = require('../../ultis/mongoose')
-const multer = require('multer')
-const store = multer.diskStorage({
-    destination: 'public/accounts/images',
-    filename: function (req, file, cb) {
-        const name = file.originalname.toLowerCase().split(' ').join('_');
-        cb(null, name + '-' + Date.now());
-    }
-});
-const upload = multer({ storage: store }).single('avartar');
 class userController{
     showInfor(req ,res,next) {
         Accounts.findById(req.params.id)
@@ -76,11 +66,8 @@ class userController{
             permision: req.body.permision,
             phonenumber: req.body.phonenumber,
             msv: req.body.msv,
-            thumbImg: req.body.file  
+            thumbImg: req.file.filename
         }
-
-
-        console.log(thumbImg);
         Accounts.findById(req.params.id)
             .then(() => {
                 Accounts.create(user)
@@ -89,9 +76,6 @@ class userController{
                     })
             })
             .catch(next)
-
-
-
     }
     renderList(req,res,next) {
         Accounts.findById(req.params.id)
@@ -120,26 +104,29 @@ class userController{
     }
     filterMember(req,res,next) {
         const [specializedMember,courseMber] = [
-            req.body.course ,req.body.specialized
+           req.body.specialized,req.body.course 
         ]   
+
+        console.log(courseMber);
         Accounts.findById(req.params.id)
             .then((acc) => {
-                if(courseMber == '') {
-                    Accounts.find({course: courseMber})
-                        .then((user) => {
-                            res.render('admin/listMember',  {acc: mongooseToObject(acc), user: multiltoObject(user), course: courseMber, specialized: specializedMember})
-                        })
-                }else if(specializedMember == '') {
-                    Accounts.find({ specialized: specializedMember})
-                        .then(user => {
-                            res.render('admin/listMember',  {acc: mongooseToObject(acc), user: multiltoObject(user), course: courseMber, specialized: specializedMember})
-                        } 
-                        )
-                } else if(courseMber == '' && specializedMember == '') {
+                if(courseMber == '' && specializedMember == '') {
                     Accounts.find()
                         .then((user) => {
                             res.render('admin/listMember',  {acc: mongooseToObject(acc), user: multiltoObject(user)})
                         })
+                }else if(specializedMember == '' && courseMber != '' ) {
+                    Accounts.find({ course: courseMber})
+                        .then(user => {
+                            res.render('admin/listMember',  {acc: mongooseToObject(acc), user: multiltoObject(user), course: courseMber, specialized: specializedMember})
+                        } 
+                    )
+                }else if(specializedMember != '' && courseMber == '' ) {
+                    Accounts.find({ specialized: specializedMember})
+                        .then(user => {
+                            res.render('admin/listMember',  {acc: mongooseToObject(acc), user: multiltoObject(user), course: courseMber, specialized: specializedMember})
+                        } 
+                    )
                 } else {
                     Accounts.find({course: courseMber, specialized: specializedMember})
                     .then((user) => {

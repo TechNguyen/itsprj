@@ -1,5 +1,5 @@
 {{#with acc}}
-    <form action="/auth/admin/post/create-post/{{_id}}" method="post">
+    <form action="/auth/admin/post/create-post/{{_id}}" method="post" enctype="multipart/form-data">
       <div class="admin__post">
         <h1>Đăng một bài gì đó</h1>
     <div class="mb-3">
@@ -15,29 +15,3 @@
     <button type="submit" class="btn btn-success btn-post">Đăng bài</button>
    </form>
 {{/with}}
-
-
-<div class="content">
-    <div class="post">
-        <ul class="message-chat">
-        </ul>
-    </div>
-</div>
-
-{{!-- 
-<script src="/socket.io/socket.io.js"></script>
-<script>
-    const socket = io();
-    const btnPost = document.querySelector('.btn-post')
-    const ulList = document.querySelector('.message-chat')
-    btnPost.addEventListener('click', () => {
-        const textdes = document.querySelector('.text_post').value
-        socket.emit('on-post', {message: textdes})
-        textdes.value = ''
-    })
-    socket.on('user-post', (data) => {
-        const chatitem = document.createElement('li')
-        chatitem.innerText = data.message
-        ulList.appendChild(chatitem)
-    })
-</script> --}}
