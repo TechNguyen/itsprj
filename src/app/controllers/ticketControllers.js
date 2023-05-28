@@ -1,3 +1,6 @@
+const multer = require('multer')
+
+
 class ticketsControllers {
     vipticket (req, res , next) {
         res.json({message : 'vao ghe vip'})

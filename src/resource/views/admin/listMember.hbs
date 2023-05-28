@@ -36,39 +36,25 @@
     <table class="table">
       <thead>
         <tr>
-          <th scope="col" colspan="2">#</th>
-          <th scope="col">Họ tên thành viên</th>
-          <th scope="col">Tên thành viên</th>
+          <th scope="col">Họ</th>
+          <th scope="col">Tên</th>
           <th scope="col">Email</th>
-          <th scope="col">Địa chỉ</th>
           <th scope="col">Lớp</th>
           <th scope="col">Khóa</th>
           <th scope="col">Chuyên ngành</th>
-          <th scope="col">Chức vụ</th>
-          <th scope="col">Vị trí</th>
-          <th scope="col" colspan="2">Edit user</th>
+          <th scope="col">Ngày tạo</th>
+          <th scope="col" colspan="2">Chi tiết</th>
         </tr>
       </thead>
       <tbody>
         {{#each user}}
           <tr>
-            <td>
-              <div class="form-check form-check-inline">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  value="{{this._id}}"
-                  name="userId[]"
-                />
-              </div>
-            </td>
-            <th scope="row"></th>
             <td>{{this.firstname}}</td>
             <td>{{this.lastname}}</td>
             <td>{{this.email}}</td>
-            <td>{{this.address}}</td>
             <td>{{this.class}}</td>
-            <td>{{this.teach}}</td>
+            <td>{{this.course}}</td>
+            <td>{{this.specialized}}</td>
             <td>{{this.createdAt}}</td>
             <td>
               <a href="/auth/admin/update/{{this._id}}" class="btn btn-link">Cập nhật</a>
@@ -94,7 +80,6 @@
     </table>
 
 </form>
-
 
 {{!-- Form delete --}}
 <form method="POST" name="deleteForm" id="deleteForm">
@@ -133,15 +118,18 @@
     </div>
   </div>
 </div>
-{{!-- <nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item"><a class="page-link" href="?page={{curentPage}}" >Previous</a></li>
-    <li class="page-item"><a class="page-link" href='?page=1'>1</a></li>
-    <li class="page-item"><a class="page-link" href="?page=2">2</a></li>
-    <li class="page-item"><a class="page-link" href="?page=3">3</a></li>
-    <li class="page-item"><a class="page-link" href="?page={{curentPage}}" >Next</a></li>
+
+
+
+<nav aria-label="Page navigation example" class="row">
+  <ul class="pagination col-6">
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
   </ul>
-</nav> --}}
+</nav>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
   const delteForm = document.forms['deleteForm'];

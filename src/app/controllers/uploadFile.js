@@ -1,4 +1,5 @@
 const Accounts = require('../models/account')
+const { mongooseToObject, multiltoObject } = require('../../ultis/mongoose')
 const multer = require('multer')
 const storeage = multer.diskStorage({
     destination:  'src/public/accounts/images/',
@@ -23,13 +24,13 @@ function createUser(req,res,next) {
         permision: req.body.permision,
         phonenumber: req.body.phonenumber,
         msv: req.body.msv,
-        thumbImg: req.file.filename
+        thumbImg: req.file.filename,
     }
     Accounts.findById(req.params.id)
         .then(() => {
             Accounts.create(user)
                 .then((acc) => {
-                    res.json( acc)
+                    res.render('admin/showinfor', {acc: mongooseToObject(acc)})
                 })
         })
         .catch(next)
