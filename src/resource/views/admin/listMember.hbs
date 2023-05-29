@@ -31,7 +31,10 @@
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Lọc thành viên</button>
         </form>
   {{/with}}
-<form class="mt-4" name="container-form" method="post" action="">
+
+
+  
+ <form class="mt-4" name="container-form" method="post" action="">
   <h3>Danh sách thành viên</h3>
     <table class="table">
       <thead>
@@ -79,7 +82,7 @@
       </tbody>
     </table>
 
-</form>
+    </form>
 
 {{!-- Form delete --}}
 <form method="POST" name="deleteForm" id="deleteForm">
@@ -123,10 +126,10 @@
 
 <nav aria-label="Page navigation example" class="row">
   <ul class="pagination col-6">
-    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="page=1">1</a></li>
+    <li class="page-item"><a class="page-link" href="page=2">2</a></li>
+    <li class="page-item"><a class="page-link" href="page=3">3</a></li>
     <li class="page-item"><a class="page-link" href="#">Next</a></li>
   </ul>
 </nav>

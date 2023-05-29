@@ -1,27 +1,171 @@
 <div class="row">
     <div class="row" >
         <div class="col-sm-6 mb-3 mb-sm-0">
-            <a type="button" class="btn btn-primary">Tạo Teach Mới</a>
+            <a type="button" class="btn btn-primary btn_create_tech">Tạo Teach Mới</a>
         </div>
     </div>
 
 
-  <div class="col-sm-6 mb-3 mb-sm-0">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-               <a href="#" type="button" class="btn btn-outline-success">Success</a>
-      </div>
-    </div>
-  </div>
+
+{{#with tech}}
   <div class="col-sm-6">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" type="button" class="btn btn-outline-success">Success</a>
+        <h5 class="card-title">Tech-Support</h5>
+        <p class="card-text">{{this.title}}</p>
+        <p class="card-text">{{this.address}}</p>
+        <p class="card-text">{{this.time}}</p>
+        <p class="card-text">{{this.service}}</p>
+        <p class="card-text">{{this.status}}</p>
+        <a href="/auth/admin/techSupport" type="button" class="btn btn-outline-success">Chi tiet</a>
       </div>
     </div>
   </div>
+{{/with}}
 </div>
+
+
+
+<form class="row g-3 needs-validation" novalidate>
+  <div class="col-md-6">
+    <label for="title" class="form-label">Tiêu đề</label>
+    <input type="text" class="form-control" id="title" name="title" required>
+  </div>
+  <div class="col-md-6">
+    <label for="address" class="form-label">Địa điểm</label>
+    <input type="text" class="form-control" id="address" required name="address">
+  </div>
+  <div class="col-md-6">
+    <label for="service" class="form-label">Dịch vụ</label>
+    <div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" >
+  <label class="form-check-label" for="flexCheckDefault">
+    Vệ sinh máy
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"  >
+  <label class="form-check-label" for="flexCheckChecked">
+    Tra keo tản nhiệt
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+  <label class="form-check-label" for="flexCheckChecked">
+    Nâng cấp ổ cứng
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+  <label class="form-check-label" for="flexCheckChecked">
+    Nâng cấp ram
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+  <label class="form-check-label" for="flexCheckChecked">
+    Tư ván bảo trì, nâng cấp , mua máy
+  </label>
+</div>
+  </div>
+
+<div class="col-md-6">
+    <label for="date_time" class="form-label">Thời gian</label>
+    <input type="datetime-local" class="form-control" id="date_time" required name="date_tiem">
+  </div>
+
+<div class="col-md-6">
+    <label for="status" class="form-label">Trạng thái</label>
+  <div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+  <label class="form-check-label" for="flexCheckChecked">
+    Đang diễn ra
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+  <label class="form-check-label" for="flexCheckChecked">
+    Kết thúc
+  </label>
+</div>
+  </div>
+
+  <div class="col-12">
+    <button class="btn btn-primary" type="submit">Submit form</button>
+  </div>
+</form>
+
+
+
+{{!-- <form class="row g-3 needs-validation" novalidate>
+  <div class="col-md-6">
+    <label for="fullname" class="form-label">Họ tên</label>
+    <input type="text" class="form-control" id="fullname" name="fullname" required>
+  </div>
+  <div class="col-md-6">
+    <label for="phone_number" class="form-label">Số điện thoại</label>
+    <input type="text" class="form-control" id="phone_number" required name="phone_number">
+  </div>
+  <div class="col-md-6">
+    <label for="service" class="form-label">Dịch vụ</label>
+    <div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+  <label class="form-check-label" for="flexCheckDefault">
+    Vệ sinh máy
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+  <label class="form-check-label" for="flexCheckChecked">
+    Tra keo tản nhiệt
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+  <label class="form-check-label" for="flexCheckChecked">
+    Nâng cấp ổ cứng
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+  <label class="form-check-label" for="flexCheckChecked">
+    Nâng cấp ram
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+  <label class="form-check-label" for="flexCheckChecked">
+    Tư ván bảo trì, nâng cấp , mua máy
+  </label>
+</div>
+  </div>
+
+
+<div class="col-md-6">
+    <label for="technical" class="form-label">Technical</label>
+    <input type="text" class="form-control" id="technical" required name="technical">
+</div>
+<div class="col-md-6">
+    <label for="text_note" class="form-label">Ghi chú</label>
+    <input type="text" class="form-control" id="text_note" required name="text_note">
+  </div>
+<div class="col-md-6">
+    <label for="date_tiem" class="form-label">Ngày nhận</label>
+    <input type="datetime-local" class="form-control" id="date_tiem" required name="date_tiem">
+  
+  </div>
+
+  <div class="col-12">
+    <button class="btn btn-primary" type="submit">Submit form</button>
+  </div>
+</form> --}}
+
+<script>
+  const needs_Validation = document.querySelector('.needs-validation')
+  const showbtn = document.querySelector('.btn_create_tech')
+
+
+  showbtn.addEventListener('click', () => {
+    needs_Validation.classList.add('show')
+  })
+</script>

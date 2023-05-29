@@ -2,7 +2,7 @@ const Accounts = require('../models/account')
 const Feed = require('../models/feed')
 const { mongooseToObject, multiltoObject } = require('../../ultis/mongoose')
 class userController{
-    showInfor(req ,res,next) {
+        showInfor(req ,res,next) {
         Accounts.findById(req.params.id)
             .then((acc) => {
                 res.render('admin/showinfor', {acc: mongooseToObject(acc)})
@@ -51,36 +51,15 @@ class userController{
             )
             .catch(next)
     }
-    createUser(req,res,next) {
-        const user = {
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
-            username: req.body.username,
-            password: req.body.password,
-            address: req.body.address,
-            class: req.body.class,
-            email: req.body.email,
-            specialized: req.body.specialized,
-            course: req.body.course,
-            position: req.body.position,
-            permision: req.body.permision,
-            phonenumber: req.body.phonenumber,
-            msv: req.body.msv,
-            thumbImg: req.file.filename
-        }
-        Accounts.findById(req.params.id)
-            .then(() => {
-                Accounts.create(user)
-                    .then((acc) => {
-                        res.json(acc)
-                    })
-            })
-            .catch(next)
-    }
     renderList(req,res,next) {
+        let pageSize = 12;
+        let page = req.params.id || 1;
         Accounts.findById(req.params.id)
             .then((acc) => {
                 Accounts.find()
+                    .skip(pageSize * page - pageSize)
+                    .limit(pageSize)
+                    .sort({lastname: 1, course: 1})
                     .then((user) => {
                         res.render('admin/listMember', {acc: mongooseToObject(acc), user : multiltoObject(user)})
                     })
@@ -106,8 +85,6 @@ class userController{
         const [specializedMember,courseMber] = [
            req.body.specialized,req.body.course 
         ]   
-
-        console.log(courseMber);
         Accounts.findById(req.params.id)
             .then((acc) => {
                 if(courseMber == '' && specializedMember == '') {

@@ -8,7 +8,8 @@ const User = new Schema({
     firstname: String,
     lastname: String,
     classname: String,
-    timeteach: Date
+    timeteach: Date,
+    
 }, {
     collection: 'User',
     timestamps: true
