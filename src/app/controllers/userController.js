@@ -112,13 +112,6 @@ class userController{
                 }})
             .catch(next)   
     }
-    teachSupport(req,res,next) {
-        Accounts.findById(req.params.id)
-            .then((acc) => {
-                res.render('admin/techSupport', {acc: mongooseToObject(acc)})
-            })
-            .catch(next)
-    }
     contact(req,res,next) {
         Accounts.findById(req.params.id)
             .then((acc) => {

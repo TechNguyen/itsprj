@@ -2,6 +2,9 @@ const express = require('express')
 const router = express.Router();
 const user = require('../app/controllers/userController')
 const [upload, create] = [require('../app/controllers/uploadFile').upload , require('../app/controllers/uploadFile').createUser ]
+const routertech = require('./techSp')
+
+
 router.all('/*', function (req, res, next) {
     req.app.locals.layout = 'admin'; // set your layout here
     next(); // pass control to the next handler
@@ -17,7 +20,6 @@ router.get('/listMember/:id', user.renderList)
 router.post('/user/:id', upload.single('avatar') , create)
 router.post('/search/:id', user.searchMember)
 router.post('/filter/:id', user.filterMember)
-router.get('/techSupport/:id', user.teachSupport)
 router.get ('/mission/:id', user.mission)
 router.get('/logout/:id',  function(req,res,next) {
     req.app.locals.layout = 'main'

@@ -4,10 +4,7 @@
             <a type="button" class="btn btn-primary btn_create_tech">Tạo Teach Mới</a>
         </div>
     </div>
-
-
-
-{{#with tech}}
+{{#each tech}}
   <div class="col-sm-6">
     <div class="card">
       <div class="card-body">
@@ -17,16 +14,18 @@
         <p class="card-text">{{this.time}}</p>
         <p class="card-text">{{this.service}}</p>
         <p class="card-text">{{this.status}}</p>
-        <a href="/auth/admin/techSupport" type="button" class="btn btn-outline-success">Chi tiet</a>
+        <a href="/auth/admin/techSupport/techs/{{this._id}}" type="button" class="btn btn-outline-success">Chi tiet</a>
       </div>
     </div>
   </div>
-{{/with}}
+{{/each}}
+
+
 </div>
 
 
 
-<form class="row g-3 needs-validation" novalidate>
+<form class="row g-3 needs-validation" novalidate method="post" action="/auth/admin/techSupport/teachCreate">
   <div class="col-md-6">
     <label for="title" class="form-label">Tiêu đề</label>
     <input type="text" class="form-control" id="title" name="title" required>
@@ -38,31 +37,31 @@
   <div class="col-md-6">
     <label for="service" class="form-label">Dịch vụ</label>
     <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" >
+  <input class="form-check-input" type="checkbox" name="ve_sinh" id="flexCheckChecked" value="true" />
   <label class="form-check-label" for="flexCheckDefault">
     Vệ sinh máy
   </label>
 </div>
 <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"  >
+  <input class="form-check-input" type="checkbox" name="tra_keo" id="flexCheckChecked" value="true" />
   <label class="form-check-label" for="flexCheckChecked">
     Tra keo tản nhiệt
   </label>
 </div>
 <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+  <input class="form-check-input" type="checkbox" name="nang_cap" id="flexCheckChecked" value="true" />
   <label class="form-check-label" for="flexCheckChecked">
     Nâng cấp ổ cứng
   </label>
 </div>
 <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+  <input class="form-check-input" type="checkbox" name="nang_cap_ram" id="flexCheckChecked" value="true" />
   <label class="form-check-label" for="flexCheckChecked">
     Nâng cấp ram
   </label>
 </div>
 <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+  <input class="form-check-input" type="checkbox" name="tu_van" id="flexCheckChecked" value="true" />
   <label class="form-check-label" for="flexCheckChecked">
     Tư ván bảo trì, nâng cấp , mua máy
   </label>
@@ -71,24 +70,9 @@
 
 <div class="col-md-6">
     <label for="date_time" class="form-label">Thời gian</label>
-    <input type="datetime-local" class="form-control" id="date_time" required name="date_tiem">
+    <input type="date" class="form-control" id="date_time" required name="date_time">
   </div>
 
-<div class="col-md-6">
-    <label for="status" class="form-label">Trạng thái</label>
-  <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
-  <label class="form-check-label" for="flexCheckChecked">
-    Đang diễn ra
-  </label>
-</div>
-<div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
-  <label class="form-check-label" for="flexCheckChecked">
-    Kết thúc
-  </label>
-</div>
-  </div>
 
   <div class="col-12">
     <button class="btn btn-primary" type="submit">Submit form</button>
