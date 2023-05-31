@@ -1,3 +1,6 @@
+{{#with acc}}
+
+
 <div class="row">
     <div class="row" >
         <div class="col-sm-6 mb-3 mb-sm-0">
@@ -14,7 +17,7 @@
         <p class="card-text">{{this.time}}</p>
         <p class="card-text">{{this.service}}</p>
         <p class="card-text">{{this.status}}</p>
-        <a href="/auth/admin/techSupport/techs/{{this._id}}" type="button" class="btn btn-outline-success">Chi tiet</a>
+        <a href="/auth/admin/techSupport/techs/techitem/{{acc._id}}/{{this._id}}" type="button" class="btn btn-outline-success">Chi tiet</a>
       </div>
     </div>
   </div>
@@ -144,12 +147,13 @@
   </div>
 </form> --}}
 
+
+
+{{/with}}
+
+
+
+
 <script>
-  const needs_Validation = document.querySelector('.needs-validation')
-  const showbtn = document.querySelector('.btn_create_tech')
 
-
-  showbtn.addEventListener('click', () => {
-    needs_Validation.classList.add('show')
-  })
 </script>

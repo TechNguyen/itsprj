@@ -2,8 +2,6 @@ const express = require('express')
 const router = express.Router();
 const user = require('../app/controllers/userController')
 const [upload, create] = [require('../app/controllers/uploadFile').upload , require('../app/controllers/uploadFile').createUser ]
-const routertech = require('./techSp')
-
 
 router.all('/*', function (req, res, next) {
     req.app.locals.layout = 'admin'; // set your layout here
