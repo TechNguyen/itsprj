@@ -4,13 +4,8 @@ The club had many prizes in school
 
 
 ## You should read ever about Nodejs and Handlebars
-```
 [Nodejs](https://nodejs.org/en).
-
 [Handlerbars](https://handlebarsjs.com)
-```
-
-
 
 ## Init the It-Supporter 
 ```
