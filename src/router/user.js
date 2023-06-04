@@ -7,6 +7,7 @@ router.all('/*', function (req, res, next) {
     req.app.locals.layout = 'admin'; // set your layout here
     next(); // pass control to the next handler
 });
+
 router.get('/infor/:id', user.showInfor)
 router.get('/update/:id', user.updateInfor)
 router.put('/infor/:id', user.update)

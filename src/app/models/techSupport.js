@@ -2,9 +2,9 @@ const { ObjectId } = require('mongodb')
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const techSupport = new Schema({
-   time: Date,
+   time: String,
    address: String,
-   service: String,
+   service: Object,
    title: String,
    status: String,
 }, {

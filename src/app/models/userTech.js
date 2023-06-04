@@ -3,11 +3,11 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const userTech = new Schema({
     idTech: String ,
-   fullname: String,
-   phone: String,
-   option: String,
-   technical: String,
-   timeRecive: Date
+    fullname: String,
+    phone: String,
+    option: String,
+    technical: String,
+    timeRecive: Date
 }, {
     collection: 'userTech', 
     timestamps: true

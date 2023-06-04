@@ -2,7 +2,7 @@ const express = require('express')
 const customer = require('../app/controllers/createCustomer')
 const router = express.Router()
 
-router.get('/techitem/:idAdmin/:idCustomer', customer.listuser)
+router.get('/techitem/:idCustomer', customer.listuser)
 
 
 
