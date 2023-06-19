@@ -20,13 +20,18 @@ class tech {
             title: title,
             service: service
         } 
-
-        console.log(itemtech);
         techSupport.create(itemtech)
             .then((item) => {
                 res.render('admin/itemTech', {item: mongooseToObject(item), service : mongooseToObject(item.service)})
             })
             .catch(next)
+    }
+    techItem(req,res,next) {
+        techSupport.findById(req.params.id)
+            .then((ittech) => {
+                res.render('admin/itemTech', {item: mongooseToObject(ittech)})
+            })
+            .catch(next);
     }
 }
 

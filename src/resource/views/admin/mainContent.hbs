@@ -1,21 +1,73 @@
 
 <div class="content">
     <div class="post">
-        <div class="message-chat">
+        <div class="feeds__news">
             {{#each posts}}
                 <div class="feed__item">
-                        <div>
-                            <div class="feed__item--header">
-                                <img src="" alt="">
-                                <span class="time__long">
+                        <div class="feed__item--header">
+                                <div class="account_post">
+                                    {{#if this.imageUser}} 
+                                        <img src="/accounts/images/{{this.imageUser}}" alt="account_img">
+                                    {{else}}
+                                        <img src="/accounts/images/admin.jpg" alt="account_img">
+                                    {{/if}}   
                                     <p>{{this.username}}</p>
-                                    <p>{{this.createdAt}}</p>
-                                </span>
+                                </div>
+                                <div class="feed__time">
+                                    <i class="fa-solid fa-clock"></i>
+                                    <p class="create__time">{{this.createdAt}}</p>
+                                </div>
                             </div>
-                            <p>{{this.content}}</p>
-                         </div>
+                            <div class="feed__item--title">
+                                <p>{{this.content}}</p>
+                            </div>
+                            {{#if this.imageContent}} 
+                                <div class="feed__item--img">
+                                    <img src="/feeds/images/{{this.imageContent}}" alt="feed_img">
+                                </div>
+                            {{/if}}   
+                       
+                         <div class="user__action--feed">
+                            <button class="like__feed">
+                                <i class="fa-solid fa-thumbs-up"></i>
+                                <p>Thích</p>    
+                            </button>
+                        </div>
                 </div>
             {{/each}}
         </div>
     </div>
 </div>
+
+
+
+<script>
+    const time = Array.from(document.querySelectorAll('.create__time'))
+    for(let i = 0; i < time.length; i++) {
+        const createTime = new Date(time[i].innerText)
+         setInterval(function calculatorTime() {
+            const curentTime  = new Date();
+            const minutes = Math.floor((curentTime - createTime) / 60000);
+            const day = Math.floor((curentTime - createTime) / (60000 * 60 * 24));
+            const weeks = Math.floor((curentTime - createTime) / (60000 * 60 * 24 * 7));
+            if(minutes == 0) {
+                minutes = 'Vừa xong';
+            }
+            if(minutes >= 1 && minutes < 60) {
+                time[i].innerText = minutes.toLocaleString() + ' phút trước'
+            } else if(day >= 1 && minutes < 7 ) {
+                time[i].innerText = day.toLocaleString() + ' ngày trước';
+            } else if (weeks >= 1) {
+                time[i].innerText = weeks.toLocaleString() + ' tuần trước';
+            };
+    }   , 1000)
+
+
+    console.log(createTime);
+}
+
+   
+
+   
+
+</script>                                                                                           

@@ -10,6 +10,5 @@ function Route(app) {
     app.use('/auth/admin', user)
     app.use('/auth/admin/post', postFeed)
     app.use('/auth/admin/techSupport', eventech)
-    app.use('/auth/admin/techSupport/techs', acctech)
 }
 module.exports = Route

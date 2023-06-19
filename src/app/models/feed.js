@@ -5,7 +5,8 @@ const feed = new Schema({
     userId: String,
     username: String,
     content: String,
-    imageContent: String
+    imageContent: String,
+    imageUser: String
 }, {
     collection: 'Feed', 
     timestamps: true
